@@ -55,3 +55,15 @@ const observer = new IntersectionObserver(entries => {
 }, { threshold: 0.5 });
 
 animateOnScrollElements.forEach(element => observer.observe(element));
+
+// Read More / Read Less Feature
+document.querySelectorAll('.read-more-toggle').forEach(button => {
+    button.addEventListener('click', () => {
+        const content = button.previousElementSibling;
+        content.classList.toggle('expanded');
+        button.textContent = content.classList.contains('expanded') ? 'Read Less' : 'Read More';
+        if (!content.classList.contains('expanded')) {
+            content.scrollIntoView({ behavior: 'smooth' });
+        }
+    });
+});
