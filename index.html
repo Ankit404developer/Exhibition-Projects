@@ -18,6 +18,25 @@
 
 <body>
 
+    <!-- Loader Section -->
+    <div id="loader" class="loader-container">
+        <div class="loader">
+            <svg viewBox="0 0 80 80">
+                <circle r="32" cy="40" cx="40" id="test"></circle>
+            </svg>
+        </div>
+        <div class="loader triangle">
+            <svg viewBox="0 0 86 80">
+                <polygon points="43 8 79 72 7 72"></polygon>
+            </svg>
+        </div>
+        <div class="loader">
+            <svg viewBox="0 0 80 80">
+                <rect height="64" width="64" y="8" x="8"></rect>
+            </svg>
+        </div>
+    </div>
+
     <!-- Header Section -->
     <header class="bg-dark text-white py-4 text-center">
         <h1 class="typing-effect">Saraswati Puja Exhibition</h1>
@@ -54,7 +73,7 @@
                     <div class="card-body">
                         <h3 class="card-title">Bridge Overload Detection System</h3>
                         <p class="card-text">A system to monitor and prevent accidents on bridges.</p>
-                        <a href="project1.html" class="btn btn-primary btn-ripple">View Project</a>
+                        <a href="project1.html" class="btn btn-primary btn-ripple view-more">View Project</a>
                     </div>
                 </div>
             </div>
@@ -65,7 +84,7 @@
                     <div class="card-body">
                         <h3 class="card-title">Bluetooth Controlled Home Appliances</h3>
                         <p class="card-text">Control your home appliances via Bluetooth.</p>
-                        <a href="project2.html" class="btn btn-primary btn-ripple">View Project</a>
+                        <a href="project2.html" class="btn btn-primary btn-ripple view-more">View Project</a>
                     </div>
                 </div>
             </div>
@@ -76,7 +95,7 @@
                     <div class="card-body">
                         <h3 class="card-title">Smart Attendance Tracker</h3>
                         <p class="card-text">Automatically track attendance using facial recognition.</p>
-                        <a href="project3.html" class="btn btn-primary btn-ripple">View Project</a>
+                        <a href="project3.html" class="btn btn-primary btn-ripple view-more">View Project</a>
                     </div>
                 </div>
             </div>
@@ -87,7 +106,7 @@
                     <div class="card-body">
                         <h3 class="card-title">Smart Fire Detection Alarm</h3>
                         <p class="card-text">IoT-based fire and gas detection.</p>
-                        <a href="project4.html" class="btn btn-primary btn-ripple">View Project</a>
+                        <a href="project4.html" class="btn btn-primary btn-ripple view-more">View Project</a>
                     </div>
                 </div>
             </div>
@@ -96,7 +115,7 @@
                     <div class="card-body">
                         <h3 class="card-title">AgriNova IoT Sphere</h3>
                         <p class="card-text">Automated IoT-based smart irrigation.</p>
-                        <a href="project5.html" class="btn btn-primary btn-ripple">View Project</a>
+                        <a href="project5.html" class="btn btn-primary btn-ripple view-more">View Project</a>
                     </div>
                 </div>
             </div>
@@ -105,7 +124,7 @@
                     <div class="card-body">
                         <h3 class="card-title">AI-Powered Irrigation System</h3>
                         <p class="card-text">Automated AI-based smart irrigation.</p>
-                        <a href="project6.html" class="btn btn-primary btn-ripple">View Project</a>
+                        <a href="project6.html" class="btn btn-primary btn-ripple view-more">View Project</a>
                     </div>
                 </div>
             </div>
@@ -151,6 +170,26 @@
 
     <!-- Custom JS -->
     <script src="script.js"></script>
+
+    <script>
+        // Show loader for 2-3 seconds on page load
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('loader').style.display = 'none';
+            }, 1500); // Adjust the time as needed (2000ms = 2 seconds)
+        });
+
+        // Show loader for 2-3 seconds when "View More" is clicked
+        document.querySelectorAll('.view-more').forEach(button => {
+            button.addEventListener('click', (e) => {
+                e.preventDefault();
+                document.getElementById('loader').style.display = 'flex';
+                setTimeout(() => {
+                    window.location.href = button.getAttribute('href');
+                }, 700); // Adjust the time as needed (2000ms = 2 seconds)
+            });
+        });
+    </script>
 
 </body>
 
