@@ -70,7 +70,8 @@
                 </ol>
                 <h3>Code for Face Registration</h3>
                 <div class="code-box">
-                    <pre><code class="language-python">
+                    <pre id="python-code1" style="max-height: 200px; overflow: hidden;">
+<code class="language-python">
 # filepath: /c:/Users/Md.zamal/OneDrive/Desktop/face_recognition_project-main/add_faces.py
 import cv2
 import pickle
@@ -122,11 +123,14 @@ with open(names_path, 'wb') as f:
 
 with open(faces_path, 'wb') as f:
     pickle.dump(faces_data, f)
-                    </code></pre>
+</code>
+                    </pre>
+                    <button id="read-more-btn1" class="btn btn-primary mt-3">Read More</button>
                 </div>
                 <h3>Code for Face Recognition and Attendance Marking</h3>
                 <div class="code-box">
-                    <pre><code class="language-python">
+                    <pre id="python-code2" style="max-height: 200px; overflow: hidden;">
+<code class="language-python">
 # filepath: /c:/Users/Md.zamal/OneDrive/Desktop/face_recognition_project-main/test.py
 from sklearn.neighbors import KNeighborsClassifier
 import cv2
@@ -185,12 +189,12 @@ while True:
     for (x, y, w, h) in faces:
         crop_img = frame[y:y+h, x:x+w, :]
         resized_img = cv2.resize(crop_img, (50, 50)).flatten().reshape(1, -1)
-        output = knn.predict(resized_img)[0]  # Get the label (name) of the predicted person
+        output = knn.predict(resized_img)[0]  // Get the label (name) of the predicted person
 
-        if output not in marked_students:  # Check if the student has not been marked
+        if output not in marked_students:  // Check if the student has not been marked
             ts = time.time()
             date = datetime.fromtimestamp(ts).strftime("%d-%m-%Y")
-            timestamp = datetime.fromtimestamp(ts).strftime("%H:%M:%S")  # Corrected time format
+            timestamp = datetime.fromtimestamp(ts).strftime("%H:%M:%S")  // Corrected time format
             csv_file = "Attendance/Attendance_" + date + ".csv"
             exist = os.path.isfile(csv_file)
             cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 0, 255), 1)
@@ -200,7 +204,7 @@ while True:
             cv2.rectangle(frame, (x, y), (x+w, y+h), (50, 50, 255), 1)
             attendance = [str(output), str(timestamp)]
 
-            # Mark the student as present in CSV
+            // Mark the student as present in CSV
             if exist:
                 with open(csv_file, "+a") as csvfile:
                     writer = csv.writer(csvfile)
@@ -213,12 +217,12 @@ while True:
                     writer.writerow(attendance)
                 csvfile.close()
 
-            # Mark the student as present in Excel
+            // Mark the student as present in Excel
             workbook = openpyxl.load_workbook(excel_file)
             sheet = workbook.active
             sheet.append(attendance)
 
-            # Adjust font size for names dynamically based on length
+            // Adjust font size for names dynamically based on length
             name_cell = sheet.cell(row=sheet.max_row, column=1)
             name_length = len(str(output))
             font_size = max(8, min(12, 12 - 0.1 * (name_length - 10)))
@@ -226,7 +230,7 @@ while True:
 
             workbook.save(excel_file)
 
-            # Add the student to the set of marked students
+            // Add the student to the set of marked students
             marked_students.add(output)
             speak("Attendance Taken for " + str(output))
 
@@ -238,7 +242,9 @@ while True:
 
 video.release()
 cv2.destroyAllWindows()
-                    </code></pre>
+</code>
+                    </pre>
+                    <button id="read-more-btn2" class="btn btn-primary mt-3">Read More</button>
                 </div>
             </section>
 
@@ -302,6 +308,29 @@ cv2.destroyAllWindows()
 
     <!-- Custom JS -->
     <script src="project3.js"></script>
+    <script>
+        document.getElementById('read-more-btn1').addEventListener('click', function() {
+            var codeBox = document.getElementById('python-code1');
+            if (codeBox.style.maxHeight === '200px') {
+                codeBox.style.maxHeight = 'none';
+                this.textContent = 'Read Less';
+            } else {
+                codeBox.style.maxHeight = '200px';
+                this.textContent = 'Read More';
+            }
+        });
+
+        document.getElementById('read-more-btn2').addEventListener('click', function() {
+            var codeBox = document.getElementById('python-code2');
+            if (codeBox.style.maxHeight === '200px') {
+                codeBox.style.maxHeight = 'none';
+                this.textContent = 'Read Less';
+            } else {
+                codeBox.style.maxHeight = '200px';
+                this.textContent = 'Read More';
+            }
+        });
+    </script>
 </body>
 
 </html>
